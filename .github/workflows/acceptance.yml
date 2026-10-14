@@ -1,0 +1,20 @@
+name: Commercial fixture acceptance
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  acceptance:
+    name: Independent commercial acceptance
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: "24.18.1"
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm test
