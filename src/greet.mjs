@@ -1,1 +1,1 @@
-export const greet = () => 'Not yet implemented.';
+export const greet = () => 'Hello commercial fulfilment.';
